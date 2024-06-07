@@ -1,0 +1,15 @@
+{
+  "originHash" : "9aab64a448c334bcdcbcde9614a14824284c112db55add4bd61a56c8e77e87f4",
+  "pins" : [
+    {
+      "identity" : "networkingpackage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ananamgaladze/NetworkingPackage",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3ccf21c2f3a73c3c1228da9a7cda0e7d21a3d994"
+      }
+    }
+  ],
+  "version" : 3
+}
