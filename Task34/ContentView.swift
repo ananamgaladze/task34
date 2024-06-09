@@ -6,27 +6,44 @@
 //
 
 import SwiftUI
+
 struct ContentView: View {
-    @StateObject var moviesViewModel = MoviesViewModel()
+    @StateObject var moviesViewModel: MoviesViewModel
+    @StateObject private var searchViewModel: SearchViewModel
+    @StateObject private var favoritesViewModel: FavouritesViewModel
+    
+    init() {
+        let moviesVM = MoviesViewModel()
+        _moviesViewModel = StateObject(wrappedValue: moviesVM)
+        let searchVM = SearchViewModel(moviesViewModel: moviesVM)
+        _searchViewModel = StateObject(wrappedValue: searchVM)
+        let favoritesVM = FavouritesViewModel()
+        _favoritesViewModel = StateObject(wrappedValue: favoritesVM)
+    }
     
     var body: some View {
-        let searchViewModel = SearchViewModel(moviesViewModel: moviesViewModel)
-        
         TabView {
             MoviesView()
                 .tabItem {
-                    Image(systemName: "film")
-                    Text("Films")
+                    Image(.home)
+                    Text("Home")
                 }
+            
             SearchView(viewModel: searchViewModel)
                 .tabItem {
-                    Image(systemName: "magnifyingglass")
+                    Image(.loop)
                     Text("Search")
                 }
             
+            FavouritesView()
+                .tabItem {
+                    Image(.save)
+                    Text("Favourites")
+                }
         }
         .environmentObject(moviesViewModel)
-        .accentColor(.bPurple)
+        .environmentObject(favoritesViewModel)
+        .accentColor(.blue)
     }
 }
 

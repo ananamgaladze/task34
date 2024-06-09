@@ -21,10 +21,10 @@ struct MoviesResponse: Decodable {
     }
 }
 
-struct Movie: Decodable,Equatable {
+struct Movie: Codable, Identifiable {
     let adult: Bool
     let backdropPath: String
-    let genreIDS: [Int]
+    let genreIDS: [Int]?
     let id: Int
     let originalLanguage: String
     let originalTitle: String
@@ -36,6 +36,8 @@ struct Movie: Decodable,Equatable {
     let video: Bool
     let voteAverage: Double
     let voteCount: Int
+    let genres: [Genre]?
+    let runtime: Int?
 
     enum CodingKeys: String, CodingKey {
         case adult
@@ -52,5 +54,12 @@ struct Movie: Decodable,Equatable {
         case video
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
+        case genres
+        case runtime
     }
+}
+
+struct Genre: Identifiable, Codable, Hashable {
+    let id: Int
+    let name: String
 }

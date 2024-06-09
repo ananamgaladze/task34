@@ -24,9 +24,7 @@ struct ImageLoadingView: View {
                 Image(uiImage: imageLoader.image!)
                     .resizable()
                     .scaledToFill()
-                    .frame(height: imageSize)
-                    .cornerRadius(10)
-                    .shadow(radius: 5)
+//                    .frame(height: imageSize)
                 
                 
             } else if imageLoader.errorMessage != nil {
