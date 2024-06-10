@@ -11,7 +11,7 @@ struct MoviesView: View {
     @EnvironmentObject var viewModel: MoviesViewModel
     
     private var columns: [GridItem] {
-        return Array(repeating: .init(.flexible()), count: 3)
+        Array(repeating: .init(.flexible()), count: 3)
     }
     
     var body: some View {
@@ -24,9 +24,7 @@ struct MoviesView: View {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(viewModel.movies) { movie in
-                            NavigationLink(destination: MovieDetailView(movie: movie)) {
-                                MovieGridItem(movie: movie)
-                            }
+                            movieGridItem(for: movie)
                         }
                     }
                     .padding()
@@ -38,22 +36,21 @@ struct MoviesView: View {
             }
         }
     }
-}
-
-struct MovieGridItem: View {
-    let movie: Movie
     
-    var body: some View {
-        VStack {
-            ImageLoadingView(url: "https://image.tmdb.org/t/p/w500\(movie.posterPath)", imageSize: 150)
-                .cornerRadius(16)
-            
+    @ViewBuilder
+    private func movieGridItem(for movie: Movie) -> some View {
+        NavigationLink(destination: MovieDetailView(movie: movie)) {
             VStack {
-                Text(movie.title)
-                    .foregroundColor(.primary)
-                    .padding(.top, 5)
-                    .multilineTextAlignment(.center)
-                Spacer()
+                ImageLoadingView(url: "https://image.tmdb.org/t/p/w500\(movie.posterPath)", imageSize: 150)
+                    .cornerRadius(16)
+                
+                VStack {
+                    Text(movie.title)
+                        .foregroundColor(.primary)
+                        .padding(.top, 5)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
             }
         }
     }

@@ -9,13 +9,15 @@ import SwiftUI
 
 @main
 struct Task34App: App {
+    
     init() {
-        UITabBar.appearance().barTintColor = UIColor.systemBackground
-        UITabBar.appearance().backgroundColor = UIColor.systemBackground
+        UITabBar.setAppearance()
     }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
     }
 }
+

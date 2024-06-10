@@ -9,22 +9,11 @@ import SwiftUI
 
 struct FavouritesView: View {
     @EnvironmentObject var favoritesViewModel: FavouritesViewModel
-
+    
     var body: some View {
         NavigationStack {
             if favoritesViewModel.favorites.isEmpty {
-                VStack {
-                    Text("No Favourites Yet")
-                        .font(.system(size: 16))
-                        .foregroundColor(.gray)
-                        .bold()
-
-                    Text("All movies marked as favourite will \nbe added here")
-                        .font(.system(size: 14))
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.center)
-                }
-                .navigationTitle("Favourites")
+                emptyStateView
             } else {
                 ScrollView {
                     LazyVStack(spacing: 16) {
@@ -36,8 +25,22 @@ struct FavouritesView: View {
                         }
                     }
                 }
-                .navigationTitle("Favourites")
             }
+        }
+        .navigationTitle("Favourites")
+    }
+    
+    private var emptyStateView: some View {
+        VStack {
+            Text("No Favourites Yet")
+                .font(.system(size: 16))
+                .foregroundColor(.gray)
+                .bold()
+            
+            Text("All movies marked as favourite will \nbe added here")
+                .font(.system(size: 14))
+                .foregroundColor(.gray)
+                .multilineTextAlignment(.center)
         }
     }
 }
